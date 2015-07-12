@@ -1,0 +1,10 @@
+power=read.table("household_power_consumption.txt",header=T,na.strings = "?",sep=";",stringsAsFactors = FALSE)
+str(power)
+power$DateTime=strptime(paste(power$Date,power$Time,sep=" "),format ="%d/%m/%Y %H:%M:%S")
+str(power)
+
+power=subset(power,(as.Date(power$DateTime))>="2007-02-01" & (as.Date(power$DateTime))<="2007-02-02")
+str(power)
+png(file="plot1.png")
+hist(power$Global_active_power,col="Red",main="Global Active Power",xlab = "Global active power (kilowatts)",xlim = c(0,6))
+dev.off()
